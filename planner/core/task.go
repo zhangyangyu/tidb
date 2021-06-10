@@ -1034,9 +1034,8 @@ type rootTask struct {
 
 func (t *rootTask) copy() task {
 	return &rootTask{
-		p:       t.p,
-		cst:     t.cst,
-		isEmpty: t.isEmpty,
+		p:   t.p,
+		cst: t.cst,
 	}
 }
 
@@ -1275,6 +1274,9 @@ func (p *PhysicalProjection) attach2Task(tasks ...task) task {
 	t = t.convertToRootTask(p.ctx)
 	t = attachPlan2Task(p, t)
 	t.addCost(p.GetCost(t.count()))
+	if root, ok := tasks[0].(*rootTask); ok && root.isEmpty {
+		t.(*rootTask).isEmpty = true
+	}
 	return t
 }
 
@@ -1336,6 +1338,9 @@ func (sel *PhysicalSelection) attach2Task(tasks ...task) task {
 	}
 	t := tasks[0].convertToRootTask(sel.ctx)
 	t.addCost(t.count() * sessVars.CPUFactor)
+	if root, ok := tasks[0].(*rootTask); ok && root.isEmpty {
+		t.isEmpty = true
+	}
 	return attachPlan2Task(sel, t)
 }
 
