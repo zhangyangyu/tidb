@@ -64,7 +64,6 @@ require (
 	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e
 	golang.org/x/sys v0.0.0-20200323222414-85ca7c5b95cd
 	golang.org/x/text v0.3.2
-	golang.org/x/time v0.0.0-20190308202827-9d24e82272b4 // indirect
 	golang.org/x/tools v0.0.0-20200325203130-f53864d0dba1
 	google.golang.org/grpc v1.25.1
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
@@ -74,3 +73,5 @@ require (
 )
 
 go 1.13
+
+replace github.com/pingcap/pd/v4 => github.com/nolouch/pd/v4 v4.0.0-20210831114947-686590ed34cd
